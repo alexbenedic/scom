@@ -1,0 +1,146 @@
+{
+  "cacheTimeout": null,
+  "datasource": "MySQL",
+  "fieldConfig": {
+    "defaults": {
+      "custom": {
+        "align": null,
+        "filterable": false
+      },
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "green",
+            "value": null
+          },
+          {
+            "color": "semi-dark-yellow",
+            "value": 1
+          },
+          {
+            "color": "dark-red",
+            "value": 2
+          },
+          {
+            "color": "dark-orange",
+            "value": 3
+          }
+        ]
+      },
+      "mappings": [
+        {
+          "from": "",
+          "id": 1,
+          "text": "UP",
+          "to": "",
+          "type": 1,
+          "value": "0"
+        },
+        {
+          "from": "",
+          "id": 2,
+          "text": "WARNING",
+          "to": "",
+          "type": 1,
+          "value": "1"
+        },
+        {
+          "from": "",
+          "id": 3,
+          "text": "CRITICAL",
+          "to": "",
+          "type": 1,
+          "value": "2"
+        },
+        {
+          "from": "",
+          "id": 4,
+          "text": "UNKNOWN",
+          "to": "",
+          "type": 1,
+          "value": "3"
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "matcher": {
+          "id": "byName",
+          "options": "CENTOS-HOST-1"
+        },
+        "properties": [
+          {
+            "id": "links",
+            "value": [
+              {
+                "title": "Details",
+                "url": "https://192.168.0.140/d/gateway/host01-dash?orgId=1&refresh=30s"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "gridPos": {
+    "h": 16,
+    "w": 8,
+    "x": 0,
+    "y": 30
+  },
+  "id": 23763571993,
+  "interval": null,
+  "links": [],
+  "maxDataPoints": 100,
+  "options": {
+    "reduceOptions": {
+      "values": false,
+      "calcs": [
+        "last"
+      ],
+      "fields": ""
+    },
+    "orientation": "horizontal",
+    "textMode": "auto",
+    "colorMode": "background",
+    "graphMode": "area",
+    "justifyMode": "auto"
+  },
+  "pluginVersion": "7.3.7",
+  "targets": [
+    {
+      "format": "time_series",
+      "group": [],
+      "metricColumn": "child",
+      "rawQuery": true,
+      "rawSql": "SELECT\n  last_check AS \"time\",\n  concat('(',host_name,') ', service_description) as name, current_state\nFROM servicestatus\nWHERE\n  $__timeFilter(last_check) and current_state = '2' ",
+      "refId": "A",
+      "select": [
+        [
+          {
+            "params": [
+              "id"
+            ],
+            "type": "column"
+          }
+        ]
+      ],
+      "table": "hoststatus",
+      "timeColumn": "last_check",
+      "timeColumnType": "timestamp",
+      "where": [
+        {
+          "name": "$__timeFilter",
+          "params": [],
+          "type": "macro"
+        }
+      ]
+    }
+  ],
+  "timeFrom": null,
+  "timeShift": null,
+  "title": "Service Status",
+  "transformations": [],
+  "type": "stat"
+}
