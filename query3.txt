@@ -1,0 +1,9 @@
+SELECT
+     downsample(ObservationTimeStamp) as time,
+     a.Node.Caption,
+     AVG(AvgLoad) as CpuLoad,
+     AVG(AvgMemoryUsed) as MemoryUsed
+FROM Orion.CPULoad a
+WHERE ObservationTimeStamp BETWEEN $from AND $to
+GROUP BY downsample(ObservationTimeStamp), a.Node.Caption, a.NodeID
+ORDER BY time DESC
