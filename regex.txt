@@ -1,0 +1,1 @@
+^[^\s]+\s+CURRENT HOST STATE: (?P<host>[\wd-]+);(?P<stat>[\w]+);+[\w]+;+[\d];(?<info>[\w]+) - (?P<ip_addr>[^ ]*) 
